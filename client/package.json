@@ -1,0 +1,10 @@
+{
+  "name": "msm.io-client",
+  "description": "msm.io Xiaomi.com",
+  "version": "0.0.1",
+  "main": "./lib/msm.io.js",
+  "author": {
+    "name": "cupdir",
+    "email": "cupdir@gmail.com"
+  }
+}
