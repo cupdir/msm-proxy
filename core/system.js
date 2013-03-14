@@ -38,7 +38,7 @@ function System(){
         }
     };
     this.load = function(command){
-        return manager.load(command);
+        return manager.load(command.replace(/(\s\s*)/g,' '));
     };
     this.hash = function(ip){
         return crypto.createHash('md5').update(ip,'utf8').digest("hex"); //创建会话
@@ -137,8 +137,8 @@ System.prototype.start = function(callback){
                 }
             }catch(e){
                 if(e.code == 'MODULE_NOT_FOUND'){
-                    self.logger.info('MODULE_NOT_FOUND');
-                    socket.write(new Buffer(e.code+'\r\n'));
+                    self.logger.info('命令模块不存在');
+                    socket.write(new Buffer('命令模块不存在'+'\r\n'));
                 }else{
                     socket.write(new Buffer(e+'\r\n')); 
                 }   

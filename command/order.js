@@ -9,6 +9,8 @@
  */
 module.exports.order  =  new Object(); //定义模块名称
 (function(exports, global){ //模块定义开始
+
+	
 	/*
 	*@param function init 模块初始化，发送命令的时候会执行这个
 	*/

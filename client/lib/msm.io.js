@@ -38,7 +38,7 @@ util.inherit(msm, events.EventEmitter); //继承EventEmitter
 //创建tcp连接
 msm.prototype.connect = function(){
     var self = this;
-    var client = net.createConnection({port:'9006',host:'10.237.39.154'});
+    var client = net.createConnection({port:'9006',host:'10.237.48.118'});
     client.setEncoding('utf8');
     client.setMaxListeners(1000);
     client.on('connect',function(){self.emit('is_connect');});

@@ -25,10 +25,15 @@ function order(config){
 	events.EventEmitter.call(this);
 };
 util.inherit(order, events.EventEmitter); //继承EventEmitter
+//得到进程发送的消息
+process.on('message',function(json_command){
+	console.log(json_command); //
+});
 /**
  * 创建一个REDIS连接
  * @return Redis object
  */
+
 order.prototype.createRedis = function(){
 	var redis_instance = false;
 	if(redis_instance == false){
@@ -40,59 +45,6 @@ order.prototype.createRedis = function(){
 			process.exit(1);
 	});
 	return redis_instance;
-}
-Array.prototype.verify = function(){
-	//TODO 验证是否存在重复
-	var arr = [],
-	    o = {},
-	    i,
-	    v,
-	    cv, 
-	    len = this.length;
-	if (len < 2) { //如果小于两个不做比较
-	    return this;
-	}
-	for (i = 0; i < len; i++) {
-	    v = this[i];
-	    cv = 0 + v;
-
-	    if (!o[cv]) {
-	        arr.push(v);
-	        o[cv] = true; //标记重复项
-	    }
-	}
-	return arr;
-}
-Array.prototype.shuffle = function(){
-	var i = this.length, j, tempi, tempj;
-	if ( i == 0 ) return false;
-	while ( --i ) {
-		j        = Math.floor( Math.random() * ( i + 1 ) );
-	    tempi   = this[i];
-	    tempj   = this[j];
-	    this[i] = tempj;
-	    this[j] = tempi;
-	}
-	return this;		
-}
-/**
- * 获取第N天的时间
- * @param int day_delta
- */
-order.prototype.getYmd = function(day_delta){
-	var d = new Date();
-	d.setDate(d.getDate() + day_delta);
-	var yy = '' + (d.getFullYear() - 2000);
-	var mm = d.getMonth() + 1;
-	if (mm < 10){
-		mm = '0' + mm;
-	}
-	var dd = d.getDate();
-	if (dd < 10){
-		dd = '0' + dd;
-	}
-	ymd = yy + mm + dd;
-	return ymd;	
 }
 exports.order  =  function(config) {
   return new order(config);
